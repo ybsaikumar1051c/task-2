@@ -1,0 +1,148 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+
+<head> 
+	<meta charset="UTF-8"> 
+	<meta name="viewport"
+		content="width=device-width, 
+				initial-scale=1.0"> 
+
+	<style> 
+		* { 
+			margin: 0; 
+			padding: 0; 
+			font-family: 
+				Verdana, Geneva, Tahoma, sans-serif; 
+		} 
+
+		.container { 
+			width: 100%; 
+			height: 100vh; 
+			background-image:url(https://c8.alamy.com/comp/2B47A44/temperature-measurement-thermometer-with-sun-snow-clouds-with-rain-symbols-weather-forecast-vector-3d-illustration-2B47A44.jpg); 
+			background-size: cover;
+			display: flex; 
+			flex-direction: column; 
+			justify-content: center; 
+			align-items: center; 
+		} 
+
+		.container h1 { 
+			color: black; 
+			font-weight: 700; 
+			font-size: 25px; 
+			text-align: center; 
+		} 
+
+		.converter-row { 
+			display: flex; 
+			width: 40%; 
+			justify-content: space-between; 
+			align-items: center; 
+			background:rgba(50, 106, 107, 1); /* This is the RGB code for violet */
+			border-radius: 10px; 
+			padding: 50px 20px; 
+		} 
+
+		.col { 
+			flex-basis: 32%; 
+			text-align: center; 
+		} 
+
+		.col label { 
+			font-size: 15px; 
+			font-weight: 500; 
+			margin-bottom: 10px; 
+			color: #fff; 
+		} 
+
+		.col input { 
+			width: 150px; 
+			height: 30px; 
+			background: white; 
+			border-radius: 5px; 
+			text-align: center; 
+		} 
+	</style> 
+</head> 
+
+<body> 
+	<div class="container"> 
+		<h1>Welcome To <br> 
+			Temperature Converter</h1> 
+		<div class="converter-row"> 
+			<div class="col"> 
+				<label>Fahrenheit</label> 
+				<input type="number"
+					id="fahrenheit"> 
+			</div> 
+
+			<div class="col"> 
+				<label>Celsius</label> 
+				<input type="number"
+					id="celsius"> 
+			</div> 
+
+			<div class="col"> 
+				<label>Kelvin</label> 
+				<input type="number"
+					id="kelvin"> 
+			</div> 
+		</div> 
+	</div> 
+
+	<script> 
+	let celsius = document.getElementById('celsius'); 
+	let fahrenheit = document.getElementById('fahrenheit'); 
+	let kelvin = document.getElementById('kelvin'); 
+	let container = document.querySelector('.container');
+
+	function changeBackground(temp) {
+		if(temp <= 18) {
+			container.style.backgroundImage = 'url(https://c4.wallpaperflare.com/wallpaper/20/581/85/winter-4k-high-def-wallpaper-preview.jpg)';
+		} else if(temp > 18 && temp <= 25) {
+			container.style.backgroundImage = 'url(https://media.istockphoto.com/id/1257951336/photo/transparent-umbrella-under-rain-against-water-drops-splash-background-rainy-weather-concept.jpg?s=612x612&w=0&k=20&c=lNvbIw1wReb-owe7_rMgW8lZz1zElqs5BOY1AZhyRXs=)'; // yellow for moderate temperatures
+		} else if(temp > 25 && temp <=35){
+			container.style.backgroundImage = 'url(https://imgs.mongabay.com/wp-content/uploads/sites/30/2020/06/19081620/Banner-C-1200x800.jpg)'; // red for hot temperatures
+		}
+		else{
+			container.style.backgroundImage ='url(https://www.worldatlas.com/r/w1200/upload/db/2e/0f/shutterstock-691981369.jpg)';
+		}
+	}
+
+	celsius.oninput = function () { 
+		let f = (parseFloat(celsius.value) * 9) / 5 + 32; 
+		fahrenheit.value = parseFloat(f.toFixed(2)); 
+
+		let k = (parseFloat(celsius.value) + 273.15); 
+		kelvin.value = parseFloat(k.toFixed(2)); 
+
+		changeBackground(celsius.value);
+	} 
+
+	fahrenheit.oninput = function () { 
+		let c = ((parseFloat(fahrenheit.value) - 32) * 5) / 9; 
+		celsius.value = parseFloat(c.toFixed(2)); 
+
+		let k = (parseFloat(fahrenheit.value) - 32) * 5 / 9 + 273.15; 
+		kelvin.value = parseFloat(k.toFixed(2)); 
+
+		changeBackground(celsius.value);
+	} 
+
+	kelvin.oninput = function () { 
+		let f = (parseFloat(kelvin.value) - 273.15) * 9 / 5 + 32; 
+		fahrenheit.value = parseFloat(f.toFixed(2)); 
+
+		let c = (parseFloat(kelvin.value) - 273.15); 
+		celsius.value = parseFloat(c.toFixed(2)); 
+
+		changeBackground(celsius.value);
+	} 
+</script>
+
+
+
+
+</body> 
+
+</html> 
